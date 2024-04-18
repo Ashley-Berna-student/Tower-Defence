@@ -11,6 +11,8 @@ namespace TowerDefence
         [SerializeField] public int gold;
         Health health;
 
+        Tower[] towers;
+
         public UnityEngine.UI.Text endText;
 
         Grid grid;
@@ -23,6 +25,7 @@ namespace TowerDefence
             cursorCapture = FindObjectOfType<UICursorPointer>();
             cursor = GetComponentInChildren<Cursor>();
             health = GetComponent<Health>();
+            towers = FindObjectsOfType<Tower>();
         }
         private void Update()
         {
@@ -39,6 +42,14 @@ namespace TowerDefence
                 if (endText != null)
                 {
                     endText.enabled = true;
+                }
+            }
+
+            foreach (Tower tower in towers)
+            {
+                if (tower.GetEnemiesKilledCount(0) == 5)
+                {
+                    print("you win");
                 }
             }
         }

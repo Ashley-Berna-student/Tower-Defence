@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 namespace TowerDefence
@@ -10,6 +11,7 @@ namespace TowerDefence
         [SerializeField] private List<GameObject> enimiesInRange = new List<GameObject>();
         public Tower_SO towerType;
         private bool firing = false;
+        [SerializeField] private int[] enemiesKilled;
         GameObject enemyTarget;
         Animator animator;
 
@@ -90,6 +92,17 @@ namespace TowerDefence
         {
             enimiesInRange.Remove(other.gameObject);
         }
-    }
 
+        public void EnemiesKilled(int enemyTypeIndex)
+        {
+            enemiesKilled[enemyTypeIndex]++;
+            print("Enemies Killed: " + enemiesKilled);
+        }
+
+        public int GetEnemiesKilledCount(int enemyTypeIndex)
+        {
+            return enemiesKilled[enemyTypeIndex];
+        }
+
+    }
 }

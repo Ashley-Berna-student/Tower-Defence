@@ -7,6 +7,12 @@ namespace TowerDefence
     public class Health : MonoBehaviour
     {
         [SerializeField] public int currentHealth = 10;
+        private Tower tower;
+
+        void Start () 
+        {
+            tower = GetComponent<Tower>();
+        }
 
         void TakeDamage(int damageAmount)
         {
@@ -17,6 +23,9 @@ namespace TowerDefence
                 if (gameObject.CompareTag("Enemy"))
                 {
                     Destroy(gameObject);
+                    int enemyTypeIndex = 0;
+                    tower.EnemiesKilled(enemyTypeIndex);
+                    print("enemies killed " + tower.GetEnemiesKilledCount(enemyTypeIndex));
                 }
             }
         }
